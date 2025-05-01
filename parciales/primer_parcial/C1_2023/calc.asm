@@ -1,6 +1,6 @@
 section .data
 	operands db '+', '*', '/', '^'
-	ops_len equ ($-operands)/4   ;4 bytes each
+	ops_len equ ($-operands)   ;1 byte each because I used db (define byte) each asccii uses 1 byte (0-255)
 	invalid_operand dd "Error: operador <%s> no reconocido", 10, 0
 	result db "Resultado = %d", 10, 0
 
