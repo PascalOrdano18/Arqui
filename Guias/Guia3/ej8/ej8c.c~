@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+#define BUFFER_SIZE 30
+
+
+void close_program(int status);  //exit
+void read_fd(int fd, void* buffer, int length);  // sys_read
+int open_file(char* fileName, int flags, int mode); //sys_open
+void close_file(int fd, int status); //sys_close 
+void write_fd(int fd, void* buffer, int length); // sys_write						    
+
+
+int main(int argc, char* argv[]){
+	
+	char* filePath = argv[1];
+	
+	int fd = open_file(filePath, 0, 0);
+	char buffer[BUFFER_SIZE];
+
+	read_fd(fd, buffer, BUFFER_SIZE);
+	write_fd(1, buffer, BUFFER_SIZE);
+	close_file(fd, 0);
+
+	close_program(0);
+}
+
+
+
+
