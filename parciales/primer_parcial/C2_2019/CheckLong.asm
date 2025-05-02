@@ -27,7 +27,7 @@ CheckLong:
 
 .check_result:
 	inc ecx ; ecx was our index, at max it was len - 1, but we want to compare it with len
-	sub ebx, ecx  ; len - calculated_len
+	sub ecx, ebx  ; calculated_len - len
 	mov eax, ebx   ; we save on eax the result
 	
 .end:
