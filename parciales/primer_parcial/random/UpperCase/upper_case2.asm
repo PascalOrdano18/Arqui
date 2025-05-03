@@ -29,7 +29,7 @@ to_upper:
 	
 	; if the flag is off and char is valid -> turn to upper case
 	sub byte [ecx], 32   ; turn char upper case
-	inc edx  ; now the flag is set to 1
+	mov edx, 1  ; now the flag is set to 1
 	jmp .next_char
 
 
@@ -38,7 +38,7 @@ to_upper:
 	jmp .loop
 
 .update_flag:
-	dec edx
+	mov edx, 0
 	jmp .next_char
 
 .end:

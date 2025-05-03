@@ -6,7 +6,8 @@ extern void to_upper(char* text);
 int main(){
 	char text[] = "este es el texto al que se le debe pasar cada primera letra de cada palabra a mayuscula!";
 	printf("FIRST TEXT: \n%s\n\n", text);
-
+	
+	puts("UPPER TEXT:\n");
 	to_upper(text);
 
 	printf("%s", text);
