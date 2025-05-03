@@ -19,7 +19,7 @@ extern void print(char* msg, int len);
 
 extern int fopen(const char* path);
 extern int fread(int fd, char* buffer, unsigned long len);
-extern int close(int fd);
+extern int fclose(int fd);
 
 int main(int argc, char* argv[]){
 	
@@ -36,27 +36,27 @@ int main(int argc, char* argv[]){
 	
 
 	char* user_input = get_user_text();
-	int user_input_len = get_len(user_input);
+	int user_input_len = get_len(user_input) - 1;
 
 	char* file_text = get_file_text(argv);
-	
-	int ocurrences = 0;
-	for(int i = 0; i < MAX_FILE_LEN; i++){
-		if(*user_input == file_text[i]){
-			int different = 0;
-			for(int j = 1; j < user_input_len; j++){
-				if(file_text[i] != user_input[j]){
-					different = 1;
-				}
-			}
-			if(!different){
-				ocurrences++;
-			}
-		}
-		
+	int occurrences = 0;
+	for (int i = 0; file_text[i] != '\0'; i++) {
+    		if (user_input[0] != file_text[i])
+        		continue;
+
+    		int j;
+    		for (j = 1; j < user_input_len; j++) {
+        		if (file_text[i + j] == '\0')  // hit end of haystack
+            			break;
+        		if (file_text[i + j] != user_input[j])  // mismatch
+            			break;
+    		}
+    		if (j == user_input_len) {
+        		occurrences++;
+    		}
 	}	
 
-	char* str_ocurrences = int_to_str(ocurrences);
+	char* str_ocurrences = int_to_str(occurrences);
 	int str_ocurrences_len = get_len(str_ocurrences);
 	print(str_ocurrences, str_ocurrences_len);
 	
@@ -102,7 +102,6 @@ char* int_to_str(int num) {
 
 char* get_user_text(){
 	unsigned long user_input_len = 256;
-	char user_input[user_input_len];   // This is the buffer
 	
 	int n = fread(FD_STDIN, user_input, user_input_len - 1);
 	// Now user_input has what the user typed in the keyboard
@@ -115,12 +114,11 @@ char* get_user_text(){
 
 char* get_file_text(char* argv[]){
 	const char* file_path = argv[1];
-	char file_text[MAX_FILE_LEN];
 	int fd = fopen(file_path);
 	int n = fread(fd, file_text, MAX_FILE_LEN - 1);
 	if(n < 0) n = 0;
 	file_text[n] = '\0';
-	close(fd);	
+	fclose(fd);	
 	
 	return file_text;
 }
