@@ -41,8 +41,8 @@ to_upper:
 	mov edx, 0
 	jmp .next_char
 
-.end:
-	mov esp, ebp
-	pop ebp
+.end: 
+	mov esp, ebp 
+	pop ebp 
 	
 	ret
