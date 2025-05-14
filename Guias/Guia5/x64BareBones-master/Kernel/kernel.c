@@ -1,3 +1,4 @@
+#include "include/naiveConsole.h"
 #include <stdint.h>
 #include <string.h>
 #include <lib.h>
@@ -81,7 +82,9 @@ void * initializeKernelBinary()
 }
 
 int main()
-{	
+{
+    ncPrintWStyle("CUSTOM COLORS", 111);
+    ncNewline();
 	ncPrint("[Kernel Main]");
 	ncNewline();
 	ncPrint("  Sample code module at 0x");

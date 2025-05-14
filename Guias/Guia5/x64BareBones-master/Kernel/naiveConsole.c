@@ -1,4 +1,6 @@
+#include "include/naiveConsole.h"
 #include <naiveConsole.h>
+#include <stdint.h>
 
 static uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base);
 
@@ -21,6 +23,20 @@ void ncPrintChar(char character)
 	*currentVideo = character;
 	currentVideo += 2;
 }
+
+// EJ 1 GUIA 5
+void ncPrintWStyle(const char* string, uint16_t style){
+    for(int i = 0; string[i] != 0; i++){
+        ncPrintCharWStyle(string[i], style);
+    }
+}
+
+void ncPrintCharWStyle(char character, uint16_t style){
+    *currentVideo = character;
+    *(currentVideo + 1) = style;
+    currentVideo += 2;
+}
+
 
 void ncNewline()
 {
