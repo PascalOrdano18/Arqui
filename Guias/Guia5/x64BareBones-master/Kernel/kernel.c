@@ -1,4 +1,8 @@
+#include "include/keyboard.h"
 #include "include/naiveConsole.h"
+#include "naiveConsole.h"
+#include "keyboard.h"
+#include "rtc.h"
 #include <stdint.h>
 #include <string.h>
 #include <lib.h>
@@ -83,7 +87,12 @@ void * initializeKernelBinary()
 
 int main()
 {
-    ncPrintWStyle("CUSTOM COLORS", 111);
+    ncNewline();
+	rtc_print_time();
+	ncNewline();
+    print_keyboard();
+	ncNewline();
+    ncPrintWStyle("CUSTOM COLORS", 27);
     ncNewline();
 	ncPrint("[Kernel Main]");
 	ncNewline();
@@ -103,5 +112,7 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
+
+
 	return 0;
 }
