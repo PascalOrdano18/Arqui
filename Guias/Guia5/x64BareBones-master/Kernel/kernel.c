@@ -1,13 +1,14 @@
-#include "include/keyboard.h"
+
 #include "include/naiveConsole.h"
-#include "naiveConsole.h"
-#include "keyboard.h"
-#include "rtc.h"
+#include <keyboard.h>
+#include <rtc.h>
 #include <stdint.h>
 #include <string.h>
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
+
+#include <idtLoader.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -87,32 +88,38 @@ void * initializeKernelBinary()
 
 int main()
 {
-    ncNewline();
-	rtc_print_time();
-	ncNewline();
-    print_keyboard();
-	ncNewline();
-    ncPrintWStyle("CUSTOM COLORS", 27);
-    ncNewline();
-	ncPrint("[Kernel Main]");
-	ncNewline();
-	ncPrint("  Sample code module at 0x");
-	ncPrintHex((uint64_t)sampleCodeModuleAddress);
-	ncNewline();
-	ncPrint("  Calling the sample code module returned: ");
-	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());
-	ncNewline();
-	ncNewline();
+    ncClear();
+    load_idt();
 
-	ncPrint("  Sample data module at 0x");
-	ncPrintHex((uint64_t)sampleDataModuleAddress);
-	ncNewline();
-	ncPrint("  Sample data module contents: ");
-	ncPrint((char*)sampleDataModuleAddress);
-	ncNewline();
+ //    ncNewline();
+	// rtc_print_time();
+	// ncNewline();
+	// ncPrintWStyle("Press a keystroke", 27);
+	// ncNewline();
+ //    // print_keyboard();
+	// ncNewline();
+ //    ncPrintWStyle("CUSTOM COLORS", 27);
+ //    ncNewline();
+	// ncPrint("[Kernel Main]");
+	// ncNewline();
+	// ncPrint("  Sample code module at 0x");
+	// ncPrintHex((uint64_t)sampleCodeModuleAddress);
+	// ncNewline();
+	// ncPrint("  Calling the sample code module returned: ");
+	// ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());
+	// ncNewline();
+	// ncNewline();
 
-	ncPrint("[Finished]");
+	// ncPrint("  Sample data module at 0x");
+	// ncPrintHex((uint64_t)sampleDataModuleAddress);
+	// ncNewline();
+	// ncPrint("  Sample data module contents: ");
+	// ncPrint((char*)sampleDataModuleAddress);
+	// ncNewline();
 
+	// ncPrint("[Finished]");
+
+	while(1);
 
 	return 0;
 }
