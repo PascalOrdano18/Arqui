@@ -16,6 +16,10 @@ void irqDispatcher(uint64_t irq) {
 	return;
 }
 
+void syscallDispatcher(){
+	
+}
+
 void int_20() {
 	// timer_handler();
 }
@@ -23,3 +27,4 @@ void int_20() {
 void int_21(){
     keyboard_handler();
 }
+

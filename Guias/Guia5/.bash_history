@@ -218,3 +218,8 @@ make all
 cd ..
 make all
 exit
+ls
+cd root/
+ls
+ls
+exit
