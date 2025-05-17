@@ -5,6 +5,7 @@
 
 void ncPrint(const char * string);
 void ncPrintChar(char character);
+void ncBackspace();
 void ncPrintWStyle(const char* string, uint16_t style);
 void ncPrintCharWStyle(char character, uint16_t style);
 void ncNewline();

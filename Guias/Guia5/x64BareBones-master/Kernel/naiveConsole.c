@@ -37,6 +37,14 @@ void ncPrintCharWStyle(char character, uint16_t style){
     currentVideo += 2;
 }
 
+// backspace para borrar
+void ncBackspace(){
+    if(currentVideo > video) {  // Check if we're not at the start of the screen
+        currentVideo -= 2;  // Move back one character
+        *currentVideo = ' ';  // Clear the character with a space
+        *(currentVideo + 1) = 0x07;  // Set default style (gray on black)
+    }
+}
 
 void ncNewline()
 {

@@ -211,3 +211,10 @@ make all
 cd ..
 make all
 exit
+cd root/
+cd x64BareBones-master/
+cd Toolchain/
+make all
+cd ..
+make all
+exit

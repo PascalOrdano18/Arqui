@@ -10,26 +10,21 @@
 
 ;   al hacer int 60h, obtenemos la lectura del teclado
 
-global set_read_keyboard
+GLOBAL set_read_keyboard
 
 section .text
 
-set_read_keyboard:
-    push rbp
-    mov rbp, rsp
-    push rbx
+set_read_keyboard: push rbp
+        mov rbp, rsp
 
-; 0101 0101
-; 0000 0001
-; 0000 0001
-read_keyboard:
-    in al, 64h
-    test al, 1
-    je read_keyboard
+        mov rax, 0
+loop:   in al, 0x64
+        mov cl, al
+        and al, 0x01
+        cmp al, 0
+        je loop
+        in al, 0x60
 
-    in al, 60h
-    pop rbx
-    mov rsp, rbp
-    pop rbp
-
-    ret
+        mov rsp, rbp
+        pop rbp
+        ret

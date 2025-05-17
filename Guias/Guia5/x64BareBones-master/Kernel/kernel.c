@@ -88,7 +88,7 @@ void * initializeKernelBinary()
 
 int main()
 {
-    ncClear();
+    
     load_idt();
 
  //    ncNewline();
