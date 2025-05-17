@@ -17,7 +17,7 @@ void irqDispatcher(uint64_t irq) {
 }
 
 void syscallDispatcher(){
-	
+		
 }
 
 void int_20() {

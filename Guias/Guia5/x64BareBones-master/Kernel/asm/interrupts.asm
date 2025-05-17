@@ -73,10 +73,13 @@ SECTION .text
 %endmacro
 
 
-%macro syscallHandlerMaster 1
+syscallHandlerMaster 1
 	pushState
 
-	mov rdi, %1 ; pasaje de parametro
+
+	mov rdi, rax ; pasaje de parametro
+	mov rsi, rbx ; pasaje de parametro
+	mov rdx, rcx ; pasaje de parametro
 	call syscallDispatcher
 
 	; signal pic EOI (End of Interrupt)
@@ -85,7 +88,6 @@ SECTION .text
 
 	popState
 	iretq
-%endmacro
 
 
 
