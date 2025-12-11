@@ -9,31 +9,7 @@
 
 section .text
 
-GLOBAL _start
 GLOBAL num2str
-
-_start:
-	mov eax, 1234
-
-	push buffer
-	push eax
-	
-	call num2str
-
-	add esp, 8  ; con esto limpio el stack frame de la funcion num2str
-
-	;; prueba a ver si se armo bien el string
-
-	mov eax, 4
-	mov ebx, 1
-	mov ecx, buffer
-	mov edx, 20
-	int 80h
-
-
-	mov eax, 1
-	mov ebx, 0
-	int 80h
 
 num2str:
 	push ebp
