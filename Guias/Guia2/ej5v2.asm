@@ -7,32 +7,55 @@ section .text
 EXTERN num2str
 GLOBAL _start
 _start:
-    pop ebp
+    push ebp
     mov ebp, esp
 
     mov eax, 5 ; n = 5 = eax
     mov ebx, 50; k = 50 = ebx
 
-    mov ecx, 1 ; ecx va a ser la suma hasta k
+    mov ecx, 0 ; ecx va a ser la suma hasta k
 
 loop:
     cmp ecx, ebx
     jg end
     
-    push ecx ; voy poniendo en la pila cada multiplo
     add ecx, eax
+
+    push eax
+    push ebx
+    push ecx
 
     push buffer
     push ecx
     call num2str
     add esp, 8
-    
+
+    pop ecx
+    pop ebx
+    pop eax
+
+    push eax
+    push ebx
+    push ecx
+
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, buffer
+    mov edx, 20
+	int 80h
+
+	pop ecx
+	pop ebx
+	pop eax
+	
+
+
     jmp loop
 
 
 end:
     mov eax, 1
-    mov eax, 0
+    mov ebx, 0
     int 80h
 
 
