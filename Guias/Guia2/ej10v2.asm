@@ -85,6 +85,7 @@ loop:
 	mov edx, lenArgv2
 	int 80h
 
+	pop ecx
 
 	mov eax, 4
 	mov ebx, 1
@@ -92,7 +93,6 @@ loop:
 	mov edx, 20
 	int 80h
 
-	pop ecx
 	
 	inc ecx
 	push ecx
