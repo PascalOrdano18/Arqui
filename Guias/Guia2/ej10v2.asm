@@ -44,8 +44,9 @@ _start:
 loop:
 	pop ecx
 	cmp ecx, [ebp + 4] 
-	jg end
-
+	jge end
+	
+	push ecx
 	mov eax, 4
 	mov ebx, 1
 	mov ecx, argv1
@@ -53,7 +54,6 @@ loop:
 	int 80h
 
 	push ebx
-	push ecx
 	push edx
 	
 	mov eax, ecx ; tiene el indice del argv
@@ -63,7 +63,6 @@ loop:
 	add esp, 8
 
 	pop edx
-	pop ecx
 	pop ebx
 
 	mov eax, 4
@@ -78,11 +77,12 @@ loop:
 	mov edx, lenArgv2
 	int 80h
 
-
+	pop ecx
 	mov eax, 4
 	mov ebx, 1
 	mov ecx, [ebp + 8 + ecx * 4]
 	mov edx, 20
+	int 80h
 	
 	inc ecx
 	push ecx
