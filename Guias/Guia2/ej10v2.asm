@@ -53,23 +53,31 @@ loop:
 	mov edx, lenArgv1
 	int 80h
 
+	pop ecx	
+	mov eax, ecx ; tiene el indice del argv
+
 	push ebx
 	push edx
 	
-	mov eax, ecx ; tiene el indice del argv
+	push ecx
+
 	push buffer
 	push eax
 	call num2str
 	add esp, 8
 
+	pop ecx
 	pop edx
 	pop ebx
-
+	
+	push ecx
+		
 	mov eax, 4
 	mov ebx, 1
 	mov ecx, buffer
 	mov edx, 20
 	int 80h
+
 
 	mov eax, 4
 	mov ebx, 1
@@ -77,12 +85,14 @@ loop:
 	mov edx, lenArgv2
 	int 80h
 
-	pop ecx
+
 	mov eax, 4
 	mov ebx, 1
 	mov ecx, [ebp + 8 + ecx * 4]
 	mov edx, 20
 	int 80h
+
+	pop ecx
 	
 	inc ecx
 	push ecx
